@@ -1,8 +1,80 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+:root {
+	--size: calc(90vmin - 3rem);
 }
 
-a {
-  color: #00B7FF;
+* {
+	font-family: Arial;
+}
+
+body {
+	margin: 0;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	width: fit-content;
+}
+
+/* PANEL */
+.panel {
+	min-width: 20rem;
+	min-height: 15rem;
+	background: green;
+}
+
+/* BOARD */
+.board {
+	height: var(--size);
+	width: var(--size);
+	background: brown;
+	padding: 1rem;
+	position: relative;
+	margin: 0 5rem;
+}
+
+.row {
+	height: calc(100%/8);
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tile {
+	height: 100%;
+	width: calc(100% / 8);
+	background: white;
+}
+
+.row:nth-child(2n + 1) .tile:nth-child(2n) {
+	background: black;
+}
+
+.row:nth-child(2n) .tile:nth-child(2n + 1) {
+	background: black;
+}
+
+/* pieces */
+.overlayBoard {
+	position: absolute;
+	height: calc(100% - 2rem);
+	width: calc(100% - 2rem);
+	top: 1rem;
+}
+
+.piece {
+	position: absolute;
+	color: green;
+	background: #ffffff0f;
+	width: calc(100% / 8);
+	line-height: 0;
+	padding-top: calc(100% / 16);
+	text-align: center;
+	font-size: 8vmin;
+	cursor: pointer;
+}
+
+.piece:hover {
+	background: red;
 }
