@@ -63,18 +63,36 @@ body {
 	top: 1rem;
 }
 
-.piece {
+.piece,
+.posibleMoves {
+	border: 2px solid white;
 	position: absolute;
-	color: green;
-	background: #ffffff0f;
-	width: calc(100% / 8);
-	line-height: 0;
-	padding-top: calc(100% / 16);
+	width: calc(100% / 10);
+	border-radius: 50%;
+	margin: calc(100% / 80);
 	text-align: center;
-	font-size: 8vmin;
 	cursor: pointer;
+	height: calc(100% / 10);
+	user-select: none;
+	font-size: 3rem;
+	box-sizing: border-box;
+}
+
+.piece.black {
+	background: black;
+	color: white;
+}
+
+.piece.white {
+	background: white;
+	color: black;
 }
 
 .piece:hover {
 	background: red;
+}
+
+/* available */
+.posibleMoves {
+	background: green;
 }

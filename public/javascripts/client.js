@@ -9,6 +9,10 @@ function drawBoard() {
 					left: 100 / 8 * j + '%'
 					//color: (board[i][j][0] = "w") ? "white" : "black"
 				});
+				obj.addClass(board[i][j][0] == 'w' ? 'white' : 'black');
+
+				obj.attr('row', i).attr('col', j).attr('piece', board[i][j][1]);
+
 				$('.overlayBoard').append(obj);
 			}
 		}
@@ -16,6 +20,7 @@ function drawBoard() {
 }
 
 function initBoard() {
+	localStorage.setItem('userColor', 'white');
 	let color = 'b';
 
 	for (rows = 0; rows < 8; rows++) {
@@ -64,5 +69,44 @@ function initBoard() {
 	}
 	drawBoard();
 }
+
+function drawPosibleMove(row, col) {
+	console.log('draw posible move ate', row, col);
+	const obj = $('<div>', { class: 'posibleMoves' }).css({
+		top: 100 / 8 * row + '%',
+		left: 100 / 8 * col + '%'
+	});
+
+	$('.overlayBoard').append(obj);
+}
+
+function posibleMovesPawn(row, col) {
+	if (localStorage.userColor == 'white') {
+		if (row == 6) {
+			drawPosibleMove(row - 2, col);
+		}
+		drawPosibleMove(row - 1, col);
+	} else {
+		if (row == 1) {
+			drawPosibleMove(row + 2, col);
+		}
+		drawPosibleMove(row + 1, col);
+	}
+}
+
+$(document).on('click', '.piece.' + localStorage.userColor, function() {
+	$('.overlayBoard .posibleMoves').remove();
+
+	const row = parseInt($(this).attr('row'));
+	const col = parseInt($(this).attr('col'));
+	const p = $(this).attr('piece');
+
+	console.log(p, row, col);
+
+	switch (p) {
+		case 'p':
+			posibleMovesPawn(row, col);
+	}
+});
 
 initBoard();
